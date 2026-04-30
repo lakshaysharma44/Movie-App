@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="/style.css">
+
+<div class="container">
+    <div class="card">
+        <h2>Edit Movie</h2>
+
+        <form method="POST" action="/movie/<%= movie._id %>?_method=PUT">
+
+    <input value="<%= movie.movieName %>" disabled>
+
+    <input name="duration" value="<%= movie.duration %>" required>
+
+    <select name="isAdult">
+        <option value="true" <%= movie.isAdult ? "selected" : "" %>>Adult</option>
+        <option value="false" <%= !movie.isAdult ? "selected" : "" %>>Not Adult</option>
+    </select>
+
+    <button type="submit">Update</button>
+</form>
+
+        <a href="/movie">Back</a>
+    </div>
+</div>

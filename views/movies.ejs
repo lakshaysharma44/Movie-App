@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="/style.css">
+
+<div class="navbar">
+    <div>🎬 Movie App</div>
+    <div>
+        <% if(user){ %>
+            Welcome <%= user.username %> |
+            <a href="/logout">Logout</a>
+        <% } %>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- ADD MOVIE CARD -->
+    <div class="card">
+        <h2>Add Movie</h2>
+        <form method="POST" action="/movie">
+            <input name="movieName" placeholder="Movie Name" required>
+            <input name="duration" placeholder="Duration" required>
+
+            <select name="isAdult">
+                <option value="true">Adult</option>
+                <option value="false">Not Adult</option>
+            </select>
+
+            <button>Add Movie</button>
+        </form>
+    </div>
+
+    <!-- MOVIE LIST -->
+    <div class="movie-list">
+        <% movies.forEach(m => { %>
+            <div class="movie-card">
+                <h3><%= m.movieName %></h3>
+                <p>Duration: <%= m.duration %> mins</p>
+                <p>
+                    <%= m.isAdult ? "🔞 Adult" : "👨‍👩‍👧 Family" %>
+                </p>
+
+                <div class="actions">
+                   <a href="/movie/<%= m._id %>/edit">Edit</a>
+
+                    <form method="POST" action="/movie/<%= m._id %>/delete?_method=DELETE">
+    <button type="submit">Delete</button>
+</form>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+</div>
